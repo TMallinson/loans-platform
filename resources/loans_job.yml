@@ -1,0 +1,14 @@
+resources:
+  jobs:
+    loans_pipeline:
+      name: loans_pipeline_${bundle.target}
+      max_concurrent_runs: 1          # never two runs writing at once
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+        - name: source_catalog
+          default: ${var.source_catalog}
+      tasks:
+        - task_key: setup
+          notebook_task:
+            notebook_path: ../src/nb_setup.py
